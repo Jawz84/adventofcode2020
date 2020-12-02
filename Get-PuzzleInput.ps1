@@ -68,19 +68,20 @@ function GetDayPath {
 }
 
 function Setup {
+    Write-Host "Setting up default folders and files for each puzzle."
     for ($i = 1; $i -le 25; $i++) {
         $day = "day$i"
 
-        $folderToCreate = GetDayPath -Day $day
+        $folderToCreate = GetDayPath -Day $i
         $null = New-Item -Path $folderToCreate -ItemType Directory -ErrorAction SilentlyContinue
 
         "$day-1.ps1", "$day-2.ps1", "input.txt" | 
             ForEach-Object { 
-                $filePath = GetDayPath -Day $day -FileName $_
+                $filePath = GetDayPath -Day $i -FileName $_
                 $null = New-Item -Path $filePath -ItemType File -ErrorAction SilentlyContinue
             }
 
-        $puzzle1script = GetDayPath -Day $day -FileName 'input.txt'
+        $puzzle1script = GetDayPath -Day $i -FileName "$day-1.ps1"
         $fileContent = Get-Content $puzzle1script
 
         if ([string]::IsNullOrEmpty($fileContent)) {
@@ -94,11 +95,11 @@ function Setup {
 if ($month -lt 12) {
     $year = $year -1
     $days = 1..25
-    Write-Warning "Fetching puzzle input for last year: $year."
+    Write-Warning "Fetching puzzle input for last year: $year, days 1-25."
 }
 else {
     $days = 1..$day
-    Write-Host "Fetching puzzle input for $year."
+    Write-Host "Fetching puzzle input for $year, days 1-$day."
 }
 
 $parentDirectoryName = (Split-Path $pwd -Leaf)

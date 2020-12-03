@@ -107,7 +107,7 @@ if ($parentDirectoryName -notmatch "^adventofcode$year$") {
     Write-Error "Parent dir must be named 'adventofcode$year'."
 }
 
-if (-not (Test-Path (GetInputFileName -Day 25))) {
+if (-not (Test-Path (GetDayPath -Day 25))) {
     Setup
 }
 

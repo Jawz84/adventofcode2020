@@ -16,11 +16,10 @@ $day = $date.Day
 $month = $date.Month
 $fileTemplate = @'
 # example input
-$in = @"
-"@
+$in = Get-Content -Path .\exampleinput.txt
 
 # puzzle input
-# Get-Content -Path .\input.txt
+# $in = Get-Content -Path .\input.txt
 
 '@
 
@@ -41,7 +40,7 @@ function TryGrabAndSaveInput {
         }
     }
 
-    $uri = "http://adventofcode.com/$year/day/$day/input"
+    $uri = "$baseUrl/$year/day/$day/input"
     try {
         $in = Invoke-RestMethod -Uri $uri -Headers @{cookie = "session=$sessionCookie"} -ErrorAction stop
         $null = Set-Content -Path $fileName -value $in -ErrorAction stop
@@ -75,7 +74,7 @@ function Setup {
         $folderToCreate = GetDayPath -Day $i
         $null = New-Item -Path $folderToCreate -ItemType Directory -ErrorAction SilentlyContinue
 
-        "$day-1.ps1", "$day-2.ps1", "input.txt" | 
+        "$day-1.ps1", "$day-2.ps1", "input.txt", "exampleinput.txt" | 
             ForEach-Object { 
                 $filePath = GetDayPath -Day $i -FileName $_
                 $null = New-Item -Path $filePath -ItemType File -ErrorAction SilentlyContinue
@@ -85,7 +84,7 @@ function Setup {
         $fileContent = Get-Content $puzzle1script
 
         if ([string]::IsNullOrEmpty($fileContent)) {
-            $null = Set-Content -Path $puzzle1script -Value $fileTemplate
+            $null = Set-Content -Path $puzzle1script -Value "$baseUrl/$year/day/$i `n" + $fileTemplate
         }
     }
 }
@@ -107,6 +106,8 @@ if ($parentDirectoryName -notmatch "^adventofcode$year$") {
     Write-Error "Parent dir must be named 'adventofcode$year'."
 }
 
+$baseUrl = "http://adventofcode.com"
+
 if (-not (Test-Path (GetDayPath -Day 25))) {
     Setup
 }
@@ -114,8 +115,3 @@ if (-not (Test-Path (GetDayPath -Day 25))) {
 foreach ($d in $days) {
     TryGrabAndSaveInput -year $year -Day $d
 }
-
-
-
-
-

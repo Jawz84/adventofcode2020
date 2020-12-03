@@ -84,7 +84,7 @@ function Setup {
         $fileContent = Get-Content $puzzle1script
 
         if ([string]::IsNullOrEmpty($fileContent)) {
-            $null = Set-Content -Path $puzzle1script -Value "$baseUrl/$year/day/$i `n" + $fileTemplate
+            $null = Set-Content -Path $puzzle1script -Value ("# $baseUrl/$year/day/$i `n`n" + $fileTemplate)
         }
     }
 }

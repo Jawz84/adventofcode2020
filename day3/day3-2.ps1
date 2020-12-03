@@ -1,8 +1,10 @@
+# http://adventofcode.com/2020/day/3
+
 # example input
-$in = Get-Content -Path .\testinput.txt | Where-Object {$_ -notlike ""}
+$in = Get-Content -Path .\exampleinput.txt
 
 # puzzle input
-$in = Get-Content -Path .\input.txt | Where-Object {$_ -notlike ""}
+$in = Get-Content -Path .\input.txt
 
 $right = 3
 $down = 1

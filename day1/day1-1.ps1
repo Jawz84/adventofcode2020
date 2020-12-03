@@ -1,3 +1,12 @@
+# http://adventofcode.com/2020/day/1
+
+# example input
+$in = Get-Content -Path .\exampleinput.txt
+
+# puzzle input
+$in = Get-Content -Path .\input.txt
+
+
 [int[]]$in = Get-Content .\input.txt
 
 $correct = 2020

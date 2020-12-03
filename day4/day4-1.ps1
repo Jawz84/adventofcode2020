@@ -1,7 +1,8 @@
+# http://adventofcode.com/2020/day/4 
+
 # example input
-$in = @"
-"@
+$in = Get-Content -Path .\exampleinput.txt
 
 # puzzle input
-# Get-Content -Path .\input.txt
+# $in = Get-Content -Path .\input.txt
 

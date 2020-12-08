@@ -37,9 +37,6 @@ function getNestedBags {
         $rules
     )
 
-    if ($null -eq $name) {
-        return 0
-    }
     if (-not $rules.ContainsKey($name)) {
         return 0
     }

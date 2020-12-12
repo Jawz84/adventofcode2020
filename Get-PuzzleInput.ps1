@@ -106,7 +106,7 @@ if ($parentDirectoryName -notmatch "^adventofcode$year$") {
     Write-Error "Parent dir must be named 'adventofcode$year'."
 }
 
-$baseUrl = "http://adventofcode.com"
+$baseUrl = "https://adventofcode.com"
 
 if (-not (Test-Path (GetDayPath -Day 25))) {
     Setup
@@ -115,3 +115,7 @@ if (-not (Test-Path (GetDayPath -Day 25))) {
 foreach ($d in $days) {
     TryGrabAndSaveInput -year $year -Day $d
 }
+
+code "$(GetDayPath -day $day)\day$day-1.ps1"
+Set-Location  "$(GetDayPath -day $day)\"
+start-process -path "$baseUrl/$year/day/$day"

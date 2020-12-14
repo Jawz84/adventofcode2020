@@ -29,7 +29,11 @@ for ($i = 1000000000000.0 ;$i -lt 1100000000000.0; $i++) {
 # = 598411311431841
 
 
-# This isn't mine. I don't really understand why it works. Leaving it like this to study another time.
+# I have tried for hours to find some better solution. It lead me to mathematical texts about Chinese remainder theorem.
+# I don't understand mathematical writing/notation well enough to be able to applie that myself. 
+# Someone else wrote this anwer below, and it seems to be based on the fact that the dividers are all coprime, and
+# can be multiplied together as a new modulus. The solution also uses the index (+ $i on line 47) to calculate the offset, or remainder, 
+# just like I did. 
 
 $null, $timetable = (gc .\input.txt| Where-Object {$_ -notlike ""}) -split ','
 
